@@ -42,6 +42,7 @@ function Seat() {
                             selectedSeats.push(data.value);
                         })
                     }
+                    document.write(clicked.length);
                     console.log(selectedSeats);
                 })
             }
@@ -66,12 +67,13 @@ function Seat() {
             input.value = "G" + j;
         }
     }
+    
     //html값은 return값 안에 넣어주기
     return (
         
         <div class="seat-wrapper">
             여기는 스크린입니다
-            <input type="button" value="예매"/>
+        <button>예매 확인</button>
         </div>
         
         
