@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko_KR">
+<html lang="ko">
   <head>
     <!-- 메타 데이터 -->
     <meta charset="UTF-8" />
@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- CSS, JS 연결 -->
-    <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="index.js" />
+    <link rel="stylesheet" href="../src/index.css" />
+    <link rel="stylesheet" href="../src/index.js" />
 
     <!--외부 CSS 호출 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,103 +27,9 @@
   </head>
 
   <body>
-    <!-- 상단 메뉴 -->
-    <nav class="navbar">
-      <div class="navbar__logo">
-        <em class="fas fa-film"></em>
-        <h1>TOE BOX</h1>
-      </div>
+    <div id="root"></div>
 
-      <ul class="navbar__menu">
-        <li><a href=""></a>정보</li>
-        <li><a href=""></a>예매</li>
-        <li><a href=""></a>뉴스</li>
-      </ul>
-
-      <ul class="navbar__icon">
-        <li><em class="fas fa-user-shield"></em></li>
-        <li><em class="fas fa-shopping-cart"></em></li>
-        <li><em class="fas fa-search"></em></li>
-        <li><em class="fas fa-sign-in-alt"></em> 로그인</li>
-      </ul>
-
-      <a href="#" class="navbar__toggleBtn">
-        <h1><em class="fas fa-hamburger"></em></h1>
-      </a>
-    </nav>
-
-    <!-- 영화 목록 -->
-    <section class="section">
-      <div class="productList" id="productList"></div>
-    </section>
-
-    <!-- 하단 메뉴 -->
-    <footer>
-      <div class="container">
-        <div class="sec aboutus">
-          <h2>About Us</h2>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci,
-            excepturi ut cum itaque vitae rerum fuga quia esse molliti.
-          </p>
-          <ul class="link">
-            <li>
-              <a href="https://twitter.com/i/flow/login" target="_blank"
-                ><em class="fab fa-twitter"></em
-              ></a>
-            </li>
-            <li>
-              <a href="https://www.instagram.com/?hl=ko" target="_blank"
-                ><em class="fab fa-instagram"></em
-              ></a>
-            </li>
-            <li>
-              <a href="https://ko-kr.facebook.com/" target="_blank"
-                ><em class="fab fa-facebook-square"></em
-              ></a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sec quickLink">
-          <h2>Quick Link</h2>
-          <ul class="quick">
-            <li><a href="">정보</a></li>
-            <li><a href="">예매</a></li>
-            <li><a href="">뉴스</a></li>
-            <li><a href="">로그인</a></li>
-          </ul>
-        </div>
-
-        <div class="sec contact">
-          <h2>Contact Info</h2>
-          <ul class="info">
-            <li>
-              <span><em class="fas fa-map-marked-alt"></em></span>
-              <span
-                >서울특별시 금천구 가산동 371-28<br />
-                피닉스밸리, 923단지 19334호</span
-              >
-            </li>
-            <li>
-              <span><em class="fas fa-phone-alt"></em></span>
-              <p><a href="tel:01920492323">+1 019 2049 2323</a></p>
-            </li>
-            <li>
-              <span><em class="fas fa-envelope"></em></span>
-              <p>
-                <a href="mailto:supererrrr@naver.com">neveremail@naver.cox</a>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="copyrightText">
-        <p>Copyright 2022. Team TOE. All rights reserved.</p>
-      </div>
-    </footer>
-
-    <!-- --------------------------------------------------------------------------- -->
+    <!-- --------------------------------scripts------------------------------------ -->
     <!-- 메뉴 아이콘 호출 -->
     <script
       defer
@@ -132,33 +38,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="index.js" defer></script>
-
-    <!-- JSON 호출 -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-      const data = axios({
-        url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=eac2d74bb1e0d22d56ecb6c486158dbc&targetDt=20220101&itemPerPage=8",
-        method: "get",
-      });
-      data.then(function (result) {
-        console.log(result.data);
-        const boxOfficeResult = result.data.boxOfficeResult;
-        const weeklyBoxOfficeList = boxOfficeResult.weeklyBoxOfficeList;
-        let html = "";
-        weeklyBoxOfficeList.map((v, idx) => {
-          html += `<div class="product">
-                <div class="imgbox">
-                  <img src="./img/sample${idx}.jpg" alt="productMovie" />
-                  <div class="details">
-                    <h2>${v.movieNm}</h2>
-                    <span>${v.openDt}</span>
-                    <a href="#">예매하기</a>
-                  </div>
-                </div>
-              </div>`;
-        });
-        document.querySelector("#productList").innerHTML = html;
-      });
-    </script>
   </body>
 </html>
