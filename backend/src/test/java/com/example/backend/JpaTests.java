@@ -24,7 +24,7 @@ public class JpaTests {
     // @Test 
 	// public void b() {
 	// 	MovieInfo movieInfo = new MovieInfo();
-	// 	movieInfo.setMovieTitle("엔칸토");
+	// 	movieInfo.setMovieNm("엔칸토");
 	// 	movieInfoRepository.save(movieInfo); // 팀 저장
     // }
 
