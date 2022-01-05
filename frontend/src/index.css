@@ -2,7 +2,7 @@
 
 :root {
   color: darkslategray;
-  background-color: darkgray;
+  /* background-color: darkgray; */
   accent-color: hsl(313, 62%, 45%);
 }
 
