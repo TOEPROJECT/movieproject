@@ -24,6 +24,9 @@ function Seat() {
                 input.addEventListener('click', function (e) {
                     console.log(e.target.value);
                     //중복방지 함수
+                    console.log(e.target);
+                    e.target.classList.add("seatD");
+                    console.log(e.target.name);
                     selectedSeats = selectedSeats.filter((element, index) => selectedSeats.indexOf(element) != index);
 
                     //click class가 존재할때(제거해주는 toggle)
@@ -42,7 +45,7 @@ function Seat() {
                             selectedSeats.push(data.value);
                         })
                     }
-                    document.write(clicked.length);
+                    
                     console.log(selectedSeats);
                 })
             }
@@ -67,15 +70,26 @@ function Seat() {
             input.value = "G" + j;
         }
     }
-    
+    function checkSeats(e){
+        const seats=document.getElementsByClassName("seatD");
+        console.log('좌석정보');
+        console.log(seats);
+        console.log(seats[0].value);
+        const seatList=[];
+        for (let i = 0; i < seats.length; i++) {
+            const element = seats[i];
+            seatList.push(element.value);
+        }
+        console.log(seatList);
+
+    }
+
     //html값은 return값 안에 넣어주기
     return (
-        
         <div class="seat-wrapper">
             여기는 스크린입니다
-        <button>예매 확인</button>
+        <button onClick={checkSeats}>예매 확인</button>
         </div>
-        
         
     );
 }
