@@ -39,13 +39,14 @@ const MovieList = () => {
 
 function ReserveMain() {
   return (
-    <div className="ReserveMain">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<MovieList />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    // <div className="ReserveMain">
+    //   <BrowserRouter>
+    //     <Routes>
+    //       <Route path="/" element={<MovieList />}></Route>
+    //     </Routes>
+    //   </BrowserRouter>
+    // </div>
+    <MovieList />
   )
 }
 

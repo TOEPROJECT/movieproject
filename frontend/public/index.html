@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko_KR">
+<html lang="ko">
   <head>
     <!-- 메타 데이터 -->
     <meta charset="UTF-8" />
@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- CSS, JS 연결 -->
-    <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="index.js" />
+    <link rel="stylesheet" href="../src/index.css" />
+    <link rel="stylesheet" href="../src/index.js" />
 
     <!--외부 CSS 호출 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,13 +27,9 @@
   </head>
 
   <body>
-    <!-- 상단 메뉴 -->
-    <nav class="navbar">
-      <div class="navbar__logo">
-        <em class="fas fa-film"></em>
-        <h1>TOE BOX</h1>
-      </div>
+    <div id="root"></div>
 
+<<<<<<< HEAD
       <ul class="navbar__menu">
         <li><a href=""></a>정보</li>
         <li><a href=""></a>예매</li>
@@ -124,6 +120,9 @@
     </footer>
 
     <!-- --------------------------------------------------------------------------- -->
+=======
+    <!-- --------------------------------scripts------------------------------------ -->
+>>>>>>> 17e063ed5187e5090f7b90790d2a83e320270d11
     <!-- 메뉴 아이콘 호출 -->
     <script
       defer
@@ -132,33 +131,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="index.js" defer></script>
-
-    <!-- JSON 호출 -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-      const data = axios({
-        url: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=eac2d74bb1e0d22d56ecb6c486158dbc&targetDt=20220101&itemPerPage=8",
-        method: "get",
-      });
-      data.then(function (result) {
-        console.log(result.data);
-        const boxOfficeResult = result.data.boxOfficeResult;
-        const weeklyBoxOfficeList = boxOfficeResult.weeklyBoxOfficeList;
-        let html = "";
-        weeklyBoxOfficeList.map((v, idx) => {
-          html += `<div class="product">
-                <div class="imgbox">
-                  <img src="./img/sample${idx}.jpg" alt="productMovie" />
-                  <div class="details">
-                    <h2>${v.movieNm}</h2>
-                    <span>${v.openDt}</span>
-                    <a href="#">예매하기</a>
-                  </div>
-                </div>
-              </div>`;
-        });
-        document.querySelector("#productList").innerHTML = html;
-      });
-    </script>
   </body>
 </html>
