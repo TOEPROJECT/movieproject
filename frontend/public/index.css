@@ -1,14 +1,11 @@
 /* 전체적으로 적용 */
 
-:root {
-  color: darkslategray;
-  background-color: darkgray;
-  accent-color: hsl(313, 62%, 45%);
+* {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   font-family: "Vujahday Script", "East Sea Dokdo";
 }
 
@@ -163,39 +160,41 @@ a {
 /* 하단 메뉴 */
 footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: stretch;
   flex-direction: column;
   background: antiquewhite;
   position: relative;
   width: 100%;
   height: auto;
-  padding: 20px;
+  padding: 30px;
+  display: flex;
   flex-wrap: wrap;
+  margin: 0px;
 }
 
 footer .container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 footer .container .sec {
   margin-right: 30px;
 }
 
-footer .container .sec .aboutus {
-  width: 40%;
+footer .container .sec.aboutus {
+  width: 25%;
 }
 
-footer .container .sec .aboutus h2 {
+footer .container .sec.aboutus h2 {
   position: relative;
   font-weight: 500;
   margin-bottom: 24px;
 }
 
-footer .container .aboutus h2:before {
+footer .container .sec.aboutus h2:before {
   content: "";
   position: absolute;
   bottom: -5vh;
@@ -208,7 +207,7 @@ footer p {
 
 .link {
   display: flex;
-  margin-top: 5vh;
+  margin-top: 20px;
 }
 
 .link li {
@@ -219,11 +218,13 @@ footer p {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background-color: burlywood;
+  background: burlywood;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 10px;
+  margin-top: 2vh;
+  margin-bottom: 0%;
   text-decoration: none;
   border-radius: 10%;
 }
@@ -232,14 +233,24 @@ footer p {
   background: #e86;
 }
 
-.link li a .fa {
-  color: darkslategray;
-  font-size: 5px;
+footer .quickLink h2 {
+  margin-bottom: 24px;
+}
+
+footer .quickLink li {
+  list-style: none;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
 .contact {
-  width: auto;
-  margin-right: 0;
+  width: 20%;
+  margin-right: 0 !important;
+}
+
+.contact h2 {
+  margin-bottom: 24px;
 }
 
 .contact .info {
@@ -248,19 +259,26 @@ footer p {
 
 .contact .info li {
   display: flex;
-  margin-bottom: 16px;
-}
-
-.contact .info li span:nth-child(1) {
-  color: antiquewhite;
-  font-size: 20px;
-  margin-right: 10px;
+  margin-bottom: 24px;
 }
 
 .contact .info li span {
+  margin-right: 10px;
 }
+
 .contact .info li a {
   text-decoration: none;
+}
+
+.contact .info li a:hover {
+  color: #e86;
+}
+
+.copyrightText {
+  width: 100%;
+  background: antiquewhite;
+  text-align: center;
+  padding: 30px;
 }
 
 /* 반응형 상단메뉴 */
@@ -303,8 +321,4 @@ footer p {
   .navbar__icon.active {
     display: flex;
   }
-}
-
-/* 반응형 상품 카드 */
-@media screen and (max-width: 768px) {
 }

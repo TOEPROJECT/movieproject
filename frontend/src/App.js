@@ -1,7 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
-import Seat from './components/Seat';
-import Pay from './Pay';
+import "./App.css";
+import Seat from "./components/Seat";
+import Pay from "./Pay";
 
 function App() {
   return (
