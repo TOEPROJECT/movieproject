@@ -1,0 +1,23 @@
+.create-button {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: 1rem;
+    background: #353b54e0;
+    border-radius: 3px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+        .seat {
+            margin: 10px;
+            margin-top: 30px;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .clicked {
+            background-color: red;
+            color: white;
+        }
