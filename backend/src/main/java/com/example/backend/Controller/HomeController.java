@@ -1,13 +1,13 @@
-package com.example.backend.Controller;
+package com.example.backend.controller;
 
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.example.backend.Repository.UserRepository;
-import com.example.backend.Service.MailService;
 import com.example.backend.model.User;
+import com.example.backend.repository.UserRepository;
+import com.example.backend.service.MailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

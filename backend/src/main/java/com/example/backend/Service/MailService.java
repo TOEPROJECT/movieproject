@@ -1,4 +1,4 @@
-package com.example.backend.Service;
+package com.example.backend.service;
 
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
