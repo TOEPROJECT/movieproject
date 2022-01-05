@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 // import React, { useMemo, DatePickerComponent, useState, useEffect } from "react";
 // import Select from "react-select";
@@ -10,12 +10,12 @@ import ReserveMain from "./components/reserve/ReserveMain";
 // import axios from 'axios';
 // import Seat from './components/Seat';
 // import Pay from './Pay';
-=======
+
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
->>>>>>> f8f5df3143412a5eb620b965eb27731c8755e51b
+
 
 import axios from "axios";
 import Seat from "./components/Seat";
@@ -27,73 +27,10 @@ import Section from "./components/Section";
 import Footer from "./components/Footer";
 import Head from "./components/Head";
 
-// const MovieList = () => {
-//   const [list, setList] = useState([{
-//     id: '',
-//     movieTitle: ''
-//   }]);
 
-<<<<<<< HEAD
-//   useEffect(() => {
-//     axios({
-//       url: 'http://localhost:8080/movie',
-//       method: 'GET'
-//     }).then((res) => {
-//       setList(res.data);
-//       console.log(res.data);
-//     });
-//   }, []);
 
-//   return (
-//     <div class="row">
-//       <div className="category">영화 선택</div>
-//         <Select MovieList={list.map((v) => {
-//             return (
-//               <tr>
-//                 <td>{v.id}</td>
-//                 <td>{v.title}</td>
-//               </tr>
-//             )
-//           })} defaultMenuIsOpen />     
-//           {/* {list.map((v) => {
-//             return (
-//               <tr>
-//                 <td>{v.id}</td>
-//                 <td>{v.title}</td>
-//               </tr>
-//             )
-//           })} */}
-//     </div>
-//   )
-// }
+  
 
-=======
-  useEffect(() => {
-    axios({
-      url: "http://localhost:8080/movie",
-      method: "GET",
-    }).then((res) => {
-      setList(res.data);
-      console.log(res.data);
-    });
-  }, []);
-
-  return (
-    <div class="row">
-      <div className="category">영화 선택</div>
-      <Select MovieList={MovieList} defaultMenuIsOpen />
-      {list.map((v) => {
-        return (
-          <tr>
-            <td>{v.id}</td>
-            <td>{v.title}</td>
-          </tr>
-        );
-      })}
-    </div>
-  );
-};
->>>>>>> f8f5df3143412a5eb620b965eb27731c8755e51b
 
 function App() {
   const indexItems = {
@@ -105,17 +42,9 @@ function App() {
   };
 
   return (
-<<<<<<< HEAD
-    
-    <div className="select">
 
-      <ReserveMain />
-
-    </div>
-  )
     
   
-=======
     <div className="App">
       <BrowserRouter>
         <Routes>
@@ -138,7 +67,7 @@ function App() {
       </BrowserRouter>
     </div>
   );
->>>>>>> f8f5df3143412a5eb620b965eb27731c8755e51b
+
 }
 
 export default App;
