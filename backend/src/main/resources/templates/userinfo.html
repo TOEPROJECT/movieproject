@@ -1,0 +1,35 @@
+새로운 비밀번호 : <input type="password" name="userPw">
+<input type="submit" , value="수정" onclick="pw_modi()"><br>
+<input type="submit" , value="탈퇴" onclick='signout()'><br>
+<button type="button" onclick="location.href='http://localhost:8080/home'">수정완료</button>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    const pw_modi = () => { //비밀번호 수정
+        const formData = new FormData();
+        const userPw = document.querySelector('[name=userPw]').value;
+        formData.append('userPw', userPw);
+        axios({
+            url: '/pw_modi',
+            method: 'post',
+            data: formData
+        }).then((res) => {
+            alert('수정완료');
+            location.href = 'http://localhost:8080/userinfo'
+            console.log(userPw)
+        });
+    }
+</script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    const signout = () => {
+        axios({
+            url: '/signout',
+            method: 'post',
+        }).then((res) => {
+            alert('삭제 완료');
+            location.href = 'http://localhost:8080/home'
+        });
+    }
+</script>

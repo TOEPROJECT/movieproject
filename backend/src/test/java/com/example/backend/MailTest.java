@@ -4,11 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendApplicationTests {
+public class MailTest {
+    @Test
+    void mail_test() {
 
-	@Test
-	void contextLoads() {
-
-	}
-
+    }
 }
