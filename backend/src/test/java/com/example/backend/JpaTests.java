@@ -5,7 +5,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.example.backend.model.MovieInfo;
-import com.example.backend.model.TimeInfo;
 import com.example.backend.repository.MovieInfoRepository;
 import com.example.backend.repository.TimeInfoRepository;
 

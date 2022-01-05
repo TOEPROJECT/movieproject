@@ -1,6 +1,5 @@
 package com.example.backend.repository;
 
-import java.util.List;
 
 import com.example.backend.model.MovieInfo;
 
