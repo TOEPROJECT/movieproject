@@ -7,9 +7,6 @@
 import "./App.css";
 import ReserveMain from "./components/reserve/ReserveMain";
 
-// import axios from 'axios';
-// import Seat from './components/Seat';
-// import Pay from './Pay';
 
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
@@ -29,7 +26,7 @@ import Head from "./components/Head";
 
 
 
-  
+
 
 
 function App() {
@@ -43,8 +40,8 @@ function App() {
 
   return (
 
-    
-  
+
+
     <div className="App">
       <BrowserRouter>
         <Routes>
@@ -58,7 +55,7 @@ function App() {
           <Route path="/" element={<Footer />}></Route>
 
           {/* 경완오빠 로그인 페이지 넣기 */}
-          <Route path="/" element={<MovieList />}></Route>
+          <Route path="/" element={<ReserveMain />}></Route>
           <Route path="/seat" element={((<Pay />), (<Seat />))}></Route>
 
           {/* 마이페이지 안에 들어가는 내용 만들어 넣기 */}
@@ -69,5 +66,7 @@ function App() {
   );
 
 }
+
+
 
 export default App;

@@ -19,7 +19,7 @@ public class MovieInfo {
     @Id
     @GeneratedValue
     private Long id;
-    private String movieNm; // 영화 제목
+    private String movieTitle; // 영화 제목
 
     @OneToMany(mappedBy = "movieinfo")
     List<TimeInfo> timeInfoList = new ArrayList<>();
