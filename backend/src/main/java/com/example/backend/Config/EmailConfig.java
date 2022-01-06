@@ -1,4 +1,4 @@
-package com.example.backend.Config;
+package com.example.backend.config;
 
 import java.util.Properties;
 

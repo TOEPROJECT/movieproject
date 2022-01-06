@@ -1,7 +1,4 @@
-import movieAPi from "./movieAPI";
-
-async function Section() {
-  await movieAPi();
+function Nav() {
   return (
     <section class="section">
       <div class="productList" id="productList"></div>
@@ -9,4 +6,4 @@ async function Section() {
   );
 }
 
-export default Section;
+export default Nav;

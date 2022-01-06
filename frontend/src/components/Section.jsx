@@ -1,4 +1,4 @@
-function Nav(props) {
+function Section() {
   return (
     <nav class="navbar">
       <div class="navbar__logo">
@@ -8,20 +8,20 @@ function Nav(props) {
 
       <ul class="navbar__menu">
         <li>
-          <a href="/"></a>
-          {props.navItems[0].title}
+          <a href="/"></a>정보
         </li>
         <li>
-          <a href="/"></a>
-          {props.navItems[1].title}
+          <a href="/reserve"></a>예매
         </li>
         <li>
-          <a href="/news"></a>
-          {props.navItems[2].title}
+          <a href="/news"></a>뉴스
         </li>
       </ul>
 
       <ul class="navbar__icon">
+        <li>
+          <em class="fas fa-sign-in-alt"></em>
+        </li>
         <li>
           <em class="fas fa-user-shield"></em>
         </li>
@@ -30,9 +30,6 @@ function Nav(props) {
         </li>
         <li>
           <em class="fas fa-search"></em>
-        </li>
-        <li>
-          <em class="fas fa-sign-in-alt"></em> 로그인
         </li>
       </ul>
 
@@ -45,4 +42,4 @@ function Nav(props) {
   );
 }
 
-export default Nav;
+export default Section;

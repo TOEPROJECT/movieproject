@@ -1,8 +1,22 @@
 .select {
+  background-color: antiquewhite;
     padding: 50px;
     width: 300px;
+    top:50%;
+    left:50%;
   }
   
   .category {
+    background-color: antiquewhite;
+    width: 300px;
     margin: 20px 0 10px;
+    margin-top: 120px;
+    margin-left: 38%;
+    /*  width: 400px;
+        height: 400px; */
   }
+
+  .MovieList{
+    justify-content: space-between;
+  }
+

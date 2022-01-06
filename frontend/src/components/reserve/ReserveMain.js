@@ -6,10 +6,13 @@ import "./reservemain.css";
 import axios from 'axios';
 
 
+const seatClick = () =>{
+  window.location.href='/seat'
+}
 
 const MovieList = () => {
   const [list, setList] = useState([{}]);
-
+  
 
   useEffect(() => {
     axios({
@@ -26,13 +29,17 @@ const MovieList = () => {
       console.log(res.data);
     });
   }, []);
+  
 
   return (
     <div class="row">
-      <div className="category">Movie</div>
-      <Select options={list} defaultMenuIsOpen />
-      <div className="category">Time</div>
-      <Select options={list} defaultMenuIsOpen />
+      <div className="category">Movie
+      <Select options={list} defaultMenuIsOpen /></div>
+      <div className="category">Time
+      <Select options={list} defaultMenuIsOpen /></div>
+      <br></br>
+      <div className="text-light"onClick={seatClick}>
+            <button>예매하기</button></div>
     </div>
   )
 }

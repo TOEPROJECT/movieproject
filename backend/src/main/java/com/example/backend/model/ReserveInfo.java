@@ -15,6 +15,7 @@ public class ReserveInfo {
     private String runningTime; // 상영시간
     private String ticketNumber; // 예매번호
     private String selectedSeat; // 좌석번호
+    private String watchpp; //영화 관람 인원
     private String selectedTheater; // 상영관이름 
 
 }

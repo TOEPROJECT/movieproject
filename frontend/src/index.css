@@ -1,19 +1,8 @@
 /* 전체적으로 적용 */
 
-<<<<<<< HEAD:frontend/src/index.css
-:root {
-  color: darkslategray;
-  /* background-color: darkgray; */
-  accent-color: hsl(313, 62%, 45%);
-=======
-* {
-  margin: 0;
-  padding: 0;
->>>>>>> f8f5df3143412a5eb620b965eb27731c8755e51b:frontend/public/index.css
-}
-
 body {
-  font-family: "Vujahday Script", "East Sea Dokdo";
+  font-family: 'Gowun Dodum', sans-serif;
+  margin: 0px;
 }
 
 a {
@@ -172,7 +161,7 @@ footer {
   flex-direction: column;
   background: antiquewhite;
   position: relative;
-  width: 100%;
+  width: 95.65%;
   height: auto;
   padding: 30px;
   display: flex;
