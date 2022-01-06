@@ -1,13 +1,19 @@
 package com.example.backend.controller;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.example.backend.model.MovieInfo;
 import com.example.backend.model.ReserveInfo;
+import com.example.backend.model.TimeInfo;
+import com.example.backend.model.User;
 import com.example.backend.repository.MovieInfoRepository;
 import com.example.backend.repository.ReserveInfoRepository;
 import com.example.backend.repository.TimeInfoRepository;
+import com.example.backend.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +38,9 @@ public class ReserveController {
     @Autowired
     TimeInfoRepository timeInfoRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @GetMapping
     public String movieReserve() {
         return "";
@@ -53,8 +62,24 @@ public class ReserveController {
 
     @PostMapping("/seat")
     @ResponseBody
-    public String seat(@RequestBody Map<String, Object> list) {
-        System.out.println(list);
+    public String seat(@RequestBody ReserveInfo reserveInfo) {
+        System.out.println(reserveInfo);
+        Integer userId = reserveInfo.getUserId();
+        System.out.println(userId);
+
+        TimeInfo timeInfo = timeInfoRepository.findById(
+            Long.parseLong(reserveInfo.getRunningTime())).get();
+        reserveInfo.setRunningTime(timeInfo.getTime());
+
+        MovieInfo movieInfo = movieInfoRepository.findById(
+            Long.parseLong(reserveInfo.getTitle())).get();
+        reserveInfo.setTitle(movieInfo.getMovieTitle());
+
+
+        User user = userRepository.findById(userId).get();
+        reserveInfo.setUser(user);
+
+        reserveInfoRepository.save(reserveInfo);
         return "seat";
     }
 

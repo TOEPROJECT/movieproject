@@ -1,18 +1,19 @@
-import React, { useMemo, DatePickerComponent, useState, useEffect } from "react";
+import React, { useMemo, DatePickerComponent, useState, useEffect, useRef } from "react";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "./reservemain.css";
 import axios from 'axios';
 
+let allDataList = null;
 
 const seatClick = () =>{
   window.location.href='/seat'
 }
 
-const MovieList = () => {
+const MovieList = (props) => {
   const [list, setList] = useState([{}]);
-  
+
 
   useEffect(() => {
     axios({
@@ -21,39 +22,93 @@ const MovieList = () => {
       dataType: 'json'
     }).then((res) => {
       // setList(res.data);
+      allDataList = res.data;
       const selectList = [];
       res.data.map((v) => {
-        selectList.push({value: v.id, label: v.movieTitle});
+        selectList.push(
+          {value: v.id, label: v.movieTitle},
+          );
       });
       setList(selectList);
       console.log(res.data);
     });
   }, []);
-  
-
+ 
   return (
-    <div class="row">
-      <div className="category">Movie
-      <Select options={list} defaultMenuIsOpen /></div>
-      <div className="category">Time
-      <Select options={list} defaultMenuIsOpen /></div>
-      <br></br>
-      <div className="text-light"onClick={seatClick}>
-            <button>예매하기</button></div>
+    <div class="select1">
+      <div className="category">Movie</div>
+      <Select 
+        placeholder="영화를 선택해주세요."
+        options={list} onChange={(e) => {
+        console.log(e);
+        //*** 
+        sessionStorage.setItem("movieId",e.value);
+        props.onSelected(e.value);
+      }} />
     </div>
   )
 }
 
-function ReserveMain() {
+const TimeList = ( props ) => {
+  const [value, setValue] = useState(props.value);
+  const [list, setList] = useState([]);
+  console.log('time start props', props.value);
+  useEffect(() => {
+    console.log('time effect');
+    if(props.value != null) {
+      console.log(allDataList);
+      let list = null;
+      for(let obj of allDataList) {
+        if(props.value === obj.id) {
+          list = obj.timeInfoList;
+        }
+      } 
+      const selectList = []
+      list.map((v) => {
+        selectList.push(
+          {value: v.id, label: v.time},
+        );
+      });
+      console.log(list);
+      console.log(selectList);
+
+      setList(selectList);
+    }
+  }, [props.value]);
+
   return (
-    // <div className="ReserveMain">
-    //   <BrowserRouter>
-    //     <Routes>
-    //       <Route path="/" element={<MovieList />}></Route>
-    //     </Routes>
-    //   </BrowserRouter>
-    // </div>
-    <MovieList />
+    <div class="select2">
+      <div className="category">Time</div>
+      <Select 
+        placeholder="시간을 선택해주세요."
+        options={list} onChange={(e) => {
+        console.log(e);
+        //*** 
+        sessionStorage.setItem("timeId",e.value);
+        props.onSelected(e.value);
+      }}/>
+    </div>
+  )
+}
+
+
+// defaultMenuIsOpen
+function ReserveMain() {
+  const [value, setValue] = useState(null);
+  console.log('value ' + value);
+    return (
+    <>
+    <MovieList onSelected={(value) => {
+      console.log('movie selected');
+      setValue(value);
+    }}/>
+    <TimeList value={value} onSelected={(value) => {
+      console.log('time selected');
+    }} />
+    <div className="text-light"onClick={seatClick}>
+            <button>예매하기</button></div>
+
+    </>
   )
 }
 

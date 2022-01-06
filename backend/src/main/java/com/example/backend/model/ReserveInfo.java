@@ -1,7 +1,11 @@
 package com.example.backend.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
@@ -10,12 +14,15 @@ import lombok.Data;
 public class ReserveInfo {
     
     @Id
-    private String id; 
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id; // 예약번호(아이디)
     private String title; // 영화제목 
     private String runningTime; // 상영시간
-    private String ticketNumber; // 예매번호
     private String selectedSeat; // 좌석번호
-    private String watchpp; //영화 관람 인원
-    private String selectedTheater; // 상영관이름 
 
+    @ManyToOne
+    User user;
+
+    @Transient
+    private Integer userId;
 }

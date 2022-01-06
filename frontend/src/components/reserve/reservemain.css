@@ -1,22 +1,23 @@
-.select {
+.select1 {
+  position:absolute;
+  left:150px;
   background-color: antiquewhite;
-    padding: 50px;
-    width: 300px;
-    top:50%;
-    left:50%;
-  }
-  
-  .category {
-    background-color: antiquewhite;
-    width: 300px;
-    margin: 20px 0 10px;
-    margin-top: 120px;
-    margin-left: 38%;
-    /*  width: 400px;
-        height: 400px; */
+  padding: 50px;
+  width: 350px;
+}
+
+.select2 {
+  position:absolute;
+  right:150px;
+  background-color: antiquewhite;
+  padding: 50px;
+  width: 350px;
+}
+
+.category {
+  margin: 20px  10px;
   }
 
-  .MovieList{
-    justify-content: space-between;
+  .text-light{
+    position: absolute;
   }
-

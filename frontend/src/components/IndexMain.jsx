@@ -27,7 +27,7 @@ const IndexMain = () => {
 
         <ul class="navbar__menu">
           <li>
-            <a href="/">정보</a>
+            <a href="/">홈</a>
           </li>
           <li>
             <a href="/reserve">예매</a>
@@ -89,7 +89,7 @@ const IndexMain = () => {
             </p>
             <ul class="link">
               <li>
-                <a href="https://twitter.com/i/flow/login" target="_blank">
+                <a href="https://twitter.com/search?q=%EC%98%81%ED%99%94&src=typed_query" target="_blank">
                   <em class="fab fa-twitter"></em>
                 </a>
               </li>
@@ -99,7 +99,7 @@ const IndexMain = () => {
                 </a>
               </li>
               <li>
-                <a href="https://ko-kr.facebook.com/" target="_blank">
+                <a href="https://www.facebook.com/CJCGV" target="_blank">
                   <em class="fab fa-facebook-square"></em>
                 </a>
               </li>

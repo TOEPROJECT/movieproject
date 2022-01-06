@@ -44,6 +44,15 @@ a {
   border-radius: 5px;
 }
 
+/* 뉴스 중앙 정렬*/
+.App > div {
+  text-align: center;
+}
+/* 뉴스 ul-li 점 없애기 */
+.App > div > ul {
+  list-style: none;
+}
+
 .details {
   position: relative;
   width: 270px;

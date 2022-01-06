@@ -10,7 +10,7 @@ function Footer() {
           </p>
           <ul class="link">
             <li>
-              <a href="https://twitter.com/i/flow/login" target="_blank">
+              <a href="https://twitter.com/search?q=%EC%98%81%ED%99%94&src=typed_query" target="_blank">
                 <em class="fab fa-twitter"></em>
               </a>
             </li>
