@@ -1,10 +1,7 @@
 package com.example.backend.controller;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
 
 import com.example.backend.model.MovieInfo;
 import com.example.backend.model.ReserveInfo;
@@ -65,17 +62,16 @@ public class ReserveController {
     public String seat(@RequestBody ReserveInfo reserveInfo) {
         System.out.println(reserveInfo);
         Integer userId = reserveInfo.getUserId();
-        System.out.println(userId);
-
+        
         TimeInfo timeInfo = timeInfoRepository.findById(
-            Long.parseLong(reserveInfo.getRunningTime())).get();
+                Long.parseLong(reserveInfo.getRunningTime())).get();
+        
         reserveInfo.setRunningTime(timeInfo.getTime());
-
+        
         MovieInfo movieInfo = movieInfoRepository.findById(
             Long.parseLong(reserveInfo.getTitle())).get();
         reserveInfo.setTitle(movieInfo.getMovieTitle());
-
-
+            
         User user = userRepository.findById(userId).get();
         reserveInfo.setUser(user);
 

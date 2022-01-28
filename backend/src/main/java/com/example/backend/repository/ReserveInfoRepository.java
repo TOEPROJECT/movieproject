@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReserveInfoRepository extends JpaRepository<ReserveInfo, String>{
-    
+
 }

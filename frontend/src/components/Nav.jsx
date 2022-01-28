@@ -1,45 +1,92 @@
-function Nav() {
+import React, { useEffect } from "react";
+
+function Nav(props) {
+  useEffect(() => {
+    const toggleBtn = document.querySelector(".navbar__toggleBtn");
+    const menu = document.querySelector(".navbar__menu");
+    const icon = document.querySelector(".navbar__icon");
+
+    toggleBtn.addEventListener("click", () => {
+      menu.classList.toggle("active");
+      icon.classList.toggle("active");
+    });
+  }, []);
+
   return (
-    
-    <nav class="navbar">
-        <div class="navbar__logo">
-          <em class="fas fa-film"></em>
-          <h1>TOE BOX</h1>
-        </div>
+    <header>
+      <nav className="navbar">
+        <ul className="navbar__menu">
+          <li className="nav-item">
+            <a className="nav-link" href="/">
+              극장찾기 <span className="sr-only"></span>
+            </a>
+          </li>
+          <li>
+            <a className="nav-link" href="/news">
+              뉴스 <span className="sr-only"></span>
+            </a>
+          </li>
 
-        <ul class="navbar__menu">
-          <li>
-            <a href="/">홈</a>
-          </li>
-          <li>
-            <a href="/reserve">예매</a>
-          </li>
-          <li>
-            <a href="/news">뉴스</a>
+          <li className="nav-item dropdown">
+            <a
+              className="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-expanded="false"
+            >
+              예매하기
+            </a>
+            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a className="dropdown-item" href="/reserve">
+                빠른예매
+              </a>
+              <a className="dropdown-item" href="#">
+                상영스케쥴
+              </a>
+              <div className="dropdown-divider"></div>
+              <a className="dropdown-item" href="#">
+                이벤트
+              </a>
+            </div>
           </li>
         </ul>
 
-        <ul class="navbar__icon">
+        <ul className="navbar__icon">
           <li>
-            <em class="fas fa-sign-in-alt"></em>
+            <a href="/mypage">
+              <em className="fas fa-user-shield"></em>
+            </a>
           </li>
           <li>
-            <em class="fas fa-user-shield"></em>
+            <a href="/login">
+              <em className="fas fa-sign-in-alt"></em>
+            </a>
           </li>
           <li>
-            <em class="fas fa-shopping-cart"></em>
-          </li>
-          <li>
-            <em class="fas fa-search"></em>
+            <a href="#"  onClick={(e)=>{
+              if(sessionStorage.getItem("id")!=null){
+                alert("로그아웃");
+                sessionStorage.clear();
+                console.log(sessionStorage.getItem("userId"));
+                window.location = '/';
+              }else{
+                alert("로그인 해주세요");
+              }
+              }}>
+              <em className="fas fa-sign-out-alt"></em>
+            </a>
           </li>
         </ul>
 
-        <a href="#" class="navbar__toggleBtn" onClick={(e) => {}}>
+        <a href="#" className="navbar__toggleBtn">
           <h1>
-            <em class="fas fa-hamburger"></em>
+            <em className="fas fa-hamburger"></em>
           </h1>
         </a>
       </nav>
+    </header>
   );
 }
 

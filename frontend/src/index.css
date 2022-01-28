@@ -7,6 +7,38 @@ body {
 
 a {
   text-decoration: none;
+  color: darkred;
+}
+
+/* 헤더 */
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: bisque;
+  padding-top: 24px;
+}
+
+.header .header__title {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+/* 메인 배너 */
+.banner {
+  position: relative;
+  min-height: 20vh;
+  max-height: 80vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0%;
+}
+
+.banner .imgBx .img {
+  max-width: 100%;
+  max-height: 80vh;
 }
 
 /* 상품 카드 */

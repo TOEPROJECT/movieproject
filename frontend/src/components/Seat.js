@@ -77,7 +77,7 @@ let selectedSeats = new Array();
             pg: "html5_inicis",
             pay_method: "card",
             merchant_uid: `mid_${new Date().getTime()}`,
-            name: "결제테스트",
+            name: "Toe company",
             amount: "1000",
             custom_data: { name: "부가정보", decs: "세부 부가정보" },
 
@@ -102,6 +102,7 @@ let selectedSeats = new Array();
         } = response;
         if (success) {
             alert("결제성공");
+            window.location = '/';
         } else {
             alert(`결제 실패 : ${error_msg} `);
         }
@@ -128,7 +129,6 @@ let selectedSeats = new Array();
     const seats = document.getElementsByClassName("seatD");
 
     function checkSeats(e) {
-        sessionStorage.setItem("id","1");
         // const formData = new FormData(); 
         console.log(JSON.stringify(selectedSeats));
         const reserveInfo = {};
@@ -155,7 +155,7 @@ let selectedSeats = new Array();
 
         // console.log('좌석정보');
         // console.log(seats);
- 
+
         // const seatList = [];
 
         // for (let i = 0; i < seats.length; i++) {
@@ -171,9 +171,7 @@ let selectedSeats = new Array();
 
     return (
 
-
         //post
-
         // <form onSubmit={checkSeats}>
         
             <center>
@@ -183,9 +181,9 @@ let selectedSeats = new Array();
                 <p>여기는 스크린입니다</p>
             </div>
             
-                <button className="w-btn w-btn-gra1 w-btn-gra-anim" onClick={checkSeats}>출력</button>
-                <button onClick={function () { alert(seats.length + '자리가 맞나요?') }}>예매 확인!</button>
-                <button className="w-btn-outline w-btn-red-outline" type='submit' onClick={onClickPay}>결제하기</button>
+                <button className="w-btn w-btn-gra1 w-btn-gra-anim" onClick={checkSeats}>예매</button>
+                {/* <button onClick={function () { alert(seats.length + '자리가 맞나요?') }}>예매 확인!</button> */}
+                <button className="w-btn w-btn-gra1 w-btn-gra-anim" type='submit' onClick={onClickPay}>결제하기</button>
             </div></center>
         // </form>
     );

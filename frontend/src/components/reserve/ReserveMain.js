@@ -4,7 +4,8 @@ import DatePicker from "react-datepicker";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "./reservemain.css";
 import axios from 'axios';
-
+import Nav from "../Nav";
+import Header from "../Header";
 let allDataList = null;
 
 const seatClick = () =>{
@@ -33,8 +34,11 @@ const MovieList = (props) => {
       console.log(res.data);
     });
   }, []);
- 
+
   return (
+    <div className="reserve__">
+      <Header/>
+      <Nav/>
     <div class="select1">
       <div className="category">Movie</div>
       <Select 
@@ -45,6 +49,7 @@ const MovieList = (props) => {
         sessionStorage.setItem("movieId",e.value);
         props.onSelected(e.value);
       }} />
+      </div>
     </div>
   )
 }

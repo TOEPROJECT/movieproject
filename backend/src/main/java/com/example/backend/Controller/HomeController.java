@@ -1,24 +1,29 @@
 package com.example.backend.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.example.backend.model.ReserveInfo;
+import com.example.backend.model.User;
+import com.example.backend.model.UserCert;
+import com.example.backend.repository.ReserveInfoRepository;
+import com.example.backend.repository.UserCertRepository;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.Service.MailService;
-import com.example.backend.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
-@CrossOrigin
 public class HomeController {
     public String createKey() {
         StringBuffer key = new StringBuffer();
@@ -54,6 +59,12 @@ public class HomeController {
     @Autowired
     HttpSession session;
 
+    @Autowired
+    UserCertRepository userCertRepository;
+
+    @Autowired
+    ReserveInfoRepository reserveInfoRepository;
+
     @GetMapping("/login")//로그인 화면
     public String login() {
         return "login";
@@ -74,99 +85,124 @@ public class HomeController {
         return "userinfo";
     }
 
-    @PostMapping("/login")//로그인 과정
-    public String loginpost(User user, HttpServletRequest request) {
-        User result = userRepository.findByUserIdAndUserPw(user.getUserId(), user.getUserPw()); //find메소드로 id, pw를 찾아 저장시킴
-        System.out.println("로그인 시 확인 중... "+result); //입력된 값과 일치한 db를 찾았는지 확인
+    @PostMapping("/login") // 로그인 과정
+    @ResponseBody
+    public Map<String, Object> loginpost(@ModelAttribute User user) {
+        Map<String, Object> map = new HashMap<>();
+        User result = userRepository.findByUserIdAndUserPw(user.getUserId(), user.getUserPw()); // find메소드로 id, pw를 찾아                                                                                        // 저장시킴
         if (result != null) {
-            session.setAttribute("user", result); //session에 result 라는 변수에 저장한 user 데이터를 저장
-            return "redirect:/home";
-        } else {
-            System.out.println("오 류");//확인용 코드
-            return "redirect:/login";
+            map.put("user", result);
+            map.put("msg","로그인 되었습니다.");
+        } else{
+            map.put("msg","로그인에 실패했습니다..");
         }
-    } 
+        return map;
+    }
+    
 
     @PostMapping("/signup") // 회원가입 과정
-    public String signUpPost(User user, HttpServletRequest request) {
-        Object a = session.getAttribute("authStatus"); //세션에 저장한 인증 여부를 저장
-        if(a == null) { //인증을 받지 못했으면 a값은 null
+    @ResponseBody
+    public Map<String, Object> signUpPost(User user) {
+        Map<String, Object> result = new HashMap<>();
+        UserCert userCert = userCertRepository.findByCertAuthKey(user.getAuthKey());
+        if (userCert.getCertAuthStatus() == 1) { // 인증을 받지 못했으면 a값은 null
+            user.setAuthStatus(1); // 인증 여부를 db에 저장
+            userRepository.save(user);// 입력받은 데이터를 db에 저장
+            result.put("msg", "회원가입에 성공했습니다"); // 처음부터 다시 입력
+            result.put("code", 200); 
+            // 회원가입 성공 시 main화면인 home url로 이동
+        } else {
             System.out.println("이메일 인증에 실패하셨습니다.");// 확인용 코드
-            return "signup"; // 처음부터 다시 입력
-        } else {
-            user.setAuthStatus(1); //인증 여부를 db에 저장
-            userRepository.save(user);//입력받은 데이터를 db에 저장
-            return ("redirect:/home"); // 회원가입 성공 시 main화면인 home url로 이동
-        } 
+            result.put("msg", "이메일 인증에 실패했습니다"); // 처음부터 다시 입력
+        }
+        return result;
     }
 
-    @PostMapping("/signup_mail") // 인증코드를 입력한 이메일에 수신하는 과정
+    @PostMapping("/signupmail") // 인증코드를 입력한 이메일에 수신하는 과정
     @ResponseBody
-    public String signUpMail(User user) {
-        if (user.getUserEmail() == null) { 
-            System.out.println("송신할 이메일 주소가 없습니다.");
-            return "redirect:/signup";//입력받은 email주소가 없을 시 처음부터 다시 입력하게 함
+    public Map<String, Object> signUpMail(User user, UserCert userCert) {
+        Map<String, Object> result = new HashMap<>();
+        String email = user.getUserEmail();
+        System.out.println(email);
+        String key = createKey(); // createKey 메소드로 인증 코드 생성
+        boolean isSend = mailService.sendMail(email, "인증 메일입니다", key); // 입력한 email로 인증 코드 송신
+        if (isSend) {
+            userCert.setCertUserEmail(email);
+            userCert.setCertAuthKey(key);
+            userCertRepository.save(userCert);
+            result.put("msg", "이메일이 송신되었습니다");
         } else {
-            String email = user.getUserEmail(); // getUserEmail로 입력한 유저의 이메일을 email이라는 변수에 저장 
-            String key = createKey(); // createKey 메소드로 인증 코드 생성
-            session.setAttribute("authKey", key); // session에 key 등록
-            boolean isSend = mailService.sendMail(email, "인증 메일입니다", key); // 입력한 email로 인증 코드 송신
-            if (isSend) {
-                System.out.println("메일 송신 성공");
+            result.put("msg", "이메일 송신을 실패했습니다..");
+        } // 알람용 코드
+        return result;
+    }
+
+    @PostMapping("/signupcert") // 수신받은 인증코드를 입력하여 인증 상태를 변경 시켜 회원가입을 진행시킬 수 있음.
+    @ResponseBody
+    public Map<String, Object> signUpCert(User user) {
+        Map<String, Object> result = new HashMap<>();
+        String key = user.getAuthKey(); // key에는 입력받은 인증코드
+        UserCert userCert = userCertRepository.findByCertAuthKey(key); // 인증코드를 통해 데이터베이스를 찾음
+        if (userCert != null) {
+            if (userCert.getCertAuthStatus() != 0) {
+                result.put("msg", "이미 인증된 코드입니다.");
             } else {
-                System.out.println("오류! 오류!");
-            } // 확인용 코드
-            return "ok";
-        }
-    }
-
-    @PostMapping("/signup_cert")//수신받은 인증코드를 입력하여 인증 상태를 변경 시켜 회원가입을 진행시킬 수 있음.
-    @ResponseBody
-    public String signUpCert(User user) {
-        if (user.getAuthKey().equals(session.getAttribute("authKey"))) {
-            System.out.println("성 공");//확인용 코드
-            session.setAttribute("authStatus", 1); //세션에 인증 여부를 저장
-            return "done";
+                userCert.setCertAuthStatus(1);
+                userCertRepository.save(userCert);
+                result.put("msg", "인증이 완료되었습니다.");
+            }
         } else {
-            System.out.println("회원가입 실패");//확인용 코드
-            return "/signup";
+            System.out.println("회원가입 실패");// 확인용 코드
+            result.put("msg", "인증 코드를 적어주세요");
         }
+        return result;
     }
 
-    @PostMapping("/logout")//로그아웃 버튼을 누르면 session에 저장된 데이터를 삭제함
-    public String logout(HttpServletRequest request) throws Exception{
-        session = request.getSession(false);
-        if (session != null) {
-            session.removeAttribute("user");
-            session.removeAttribute("authKey");
-            session.removeAttribute("authStatus");
-        }
-        return "redirect:/home";
-    } 
+    @PostMapping("/logout") // 로그아웃 버튼을 누르면 session에 저장된 데이터를 삭제함
+    @ResponseBody
+    public Map<String, Object> logout() {
+        Map<String, Object> logout = new HashMap<>();
+        logout.put("msg", "로그아웃 되었습니다.");
+        return logout;
+    }
     
     @PostMapping("/pw_modi")//입력받은 비밀번호로 db에 저장된 userPw를 변경
-    public String userPwModify(@SessionAttribute("user") User modi, User user) {
-        System.out.println("Attribute한 user에선??" +modi); //확인용 코드
-        System.out.println("인풋받은 패스워드는?" +user.getUserPw());//확인용 코드
-        modi.setUserPw(user.getUserPw());//session attribute로 호출한 userPw를 입력받은 userPW로 변경
-        //이 부분에서 session에 저장된 데이터는 db에 저장된 데이터와 일치
-        System.out.println("세이브 전 마지막 확인" +modi);
-        session.setAttribute("user", modi); //session에 변경된 데이터를 저장
-        userRepository.save(modi);//변경된 비밀번호 제외하고 나머지가 똑같으면 save해도 지장 없음
-        return "redirect:/userinfo";
+    @ResponseBody
+    public Map<String, Object> userPwModify(User modi) {
+        Map<String, Object> map = new HashMap<>();
+        Integer id = modi.getId();
+        String userPw = modi.getUserPw();
+        User ori = userRepository.findById(id).get();
+        ori.setUserPw(userPw);
+        userRepository.save(ori);
+        map.put("msg", "비밀번호 변경이 완료되었습니다.");
+        return map;
     }
 
     @PostMapping("/signout")//회원 탈퇴
     @ResponseBody
-    public String signOutPost(@SessionAttribute("user")User signout,User user) {
-        System.out.println(signout.getId());//확인용 코드
-        user.setId(signout.getId());//ID를 세션에 저장되어 있는 ID로 지정
-        //세션에 저장되어있는 ID = DB에 저장된 ID
-        //setId를 하면서, 어느 칼럼? 데이터? 를 지울지 지정하는 효과를 가짐
-        userRepository.delete(user); //Id로 지정이 되있기에 삭제하면 그 ID에 해당되는 data가 삭제
-        session.removeAttribute("user");
-        session.removeAttribute("authKey");
-        session.removeAttribute("authStatus"); //로그아웃 하기 위해 사용한 세션 데이터 제거 
-        return "delete";
+    public Map<String, Object> signOutPost(User user) {
+        Map<String, Object> map = new HashMap<>();
+        User del = userRepository.findById(user.getId()).get();
+        System.out.println(del);//확인용 코드
+        map.put("msg", "삭제 완료"); 
+        return map;
     }
+    
+    // @PostMapping("/mypage")//회원 탈퇴
+    // @ResponseBody
+    // public Map<String, Object> mypage(User user) {
+    //     Map<String, Object> map = new HashMap<>();
+    //     System.out.println(user.getId());//확인용 코드
+    //     int i = user.getId();
+    //     ReserveInfo ers = reserveInfoRepository.findByUserId(i);
+    //     System.out.println(ers);//확인용 코드
+        
+    //     // User mypage = userRepository.findById(user.getId()).get();
+    //     // System.out.println(mypage);//확인용 코드
+    //     // Map<String, Object> map = new HashMap<>();
+    //     // User del = userRepository.findById(user.getId()).get();
+    //     map.put("msg", "done"); 
+    //     return map;
+    // }
 }
