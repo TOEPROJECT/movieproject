@@ -5,8 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.example.backend.model.MovieInfo;
-import com.example.backend.repository.MovieInfoRepository;
-import com.example.backend.repository.TimeInfoRepository;
+import com.example.backend.Repository.MovieInfoRepository;
+import com.example.backend.Repository.TimeInfoRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

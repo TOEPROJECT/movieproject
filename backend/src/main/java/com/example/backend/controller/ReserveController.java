@@ -1,4 +1,4 @@
-package com.example.backend.controller;
+package com.example.backend.Controller;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import com.example.backend.model.MovieInfo;
 import com.example.backend.model.ReserveInfo;
 import com.example.backend.model.TimeInfo;
 import com.example.backend.model.User;
-import com.example.backend.repository.MovieInfoRepository;
-import com.example.backend.repository.ReserveInfoRepository;
-import com.example.backend.repository.TimeInfoRepository;
-import com.example.backend.repository.UserRepository;
+import com.example.backend.Repository.MovieInfoRepository;
+import com.example.backend.Repository.ReserveInfoRepository;
+import com.example.backend.Repository.TimeInfoRepository;
+import com.example.backend.Repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -50,6 +50,12 @@ body{
     animation: gradient1 5s ease infinite;
 }
 
+.bottom{
+  margin-top: 340px;
+  margin-right: 0px;
+ 
+}
+
 @keyframes gradient1 {
 0% {
 background-position: 0% 50%;

@@ -1,4 +1,4 @@
-package com.example.backend.repository;
+package com.example.backend.Repository;
 
 import com.example.backend.model.MovieInfo;
 

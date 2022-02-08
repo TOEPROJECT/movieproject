@@ -110,9 +110,9 @@ function ReserveMain() {
     <TimeList value={value} onSelected={(value) => {
       console.log('time selected');
     }} />
-    <div className="text-light"onClick={seatClick}>
-            <button>예매하기</button></div>
-
+    <div className="bottom">
+    <button className="w-btn w-btn-gra1 w-btn-gra-anim"onClick={seatClick}>
+            예매하기</button></div>
     </>
   )
 }

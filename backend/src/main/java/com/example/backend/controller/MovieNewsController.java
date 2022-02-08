@@ -1,4 +1,4 @@
-package com.example.backend.controller;
+package com.example.backend.Controller;
 
 import java.util.List;
 import java.util.Map;

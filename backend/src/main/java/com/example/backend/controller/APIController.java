@@ -1,10 +1,10 @@
-package com.example.backend.controller;
+package com.example.backend.Controller;
 
 import java.util.List;
 
 import com.example.backend.model.MovieInfo;
-import com.example.backend.repository.MovieInfoRepository;
-import com.example.backend.repository.TimeInfoRepository;
+import com.example.backend.Repository.MovieInfoRepository;
+import com.example.backend.Repository.TimeInfoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
